@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+/**
+ * @brief Definição de valores constantes e caracteres representativos;
+ */
 #define MAXIMO_LINHAS 40
 #define MAXIMO_COLUNAS 100
 
@@ -19,6 +22,28 @@
 #define MOVIMENTO_PARA_DIREITA 'd'
 #define MOVIMENTO_PARA_CIMA 'w'
 #define MOVIMENTO_PARA_BAIXO 's'
+
+
+/**
+ * @brief Definição de estruturas de dados dos componentes do código;
+ */
+typedef struct{
+    int posicaoX, posicaoY;
+}Pacman;
+
+typedef struct{
+    int posicaoX, posicaoY;
+}Fantasma;
+
+
+typedef struct {
+    int posicaoX, posicaoY;
+}Portal;
+
+typedef struct{
+    int linhas, colunas;
+    Portal entrada, saida;
+}Mapa;
 
 
 
