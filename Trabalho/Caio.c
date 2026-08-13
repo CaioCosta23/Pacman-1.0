@@ -37,7 +37,7 @@ typedef struct{
 }Pacman;
 
 typedef struct{
-    int posicaoX, posicaoY;
+    int posicaoX, posicaoY, direcaoMovimento, sentidoMovimento;
 }Fantasma;
 
 
