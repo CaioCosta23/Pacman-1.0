@@ -32,17 +32,22 @@
 /**
  * @brief Definição de estruturas de dados dos componentes do código;
  */
+
+ typedef struct {
+    int x, y;
+ }Posicao;
+
 typedef struct{
-    int posicaoX, posicaoY;
+    Posicao posicao;
 }Pacman;
 
 typedef struct{
-    int posicaoX, posicaoY, direcaoMovimento, sentidoMovimento;
+    Posicao posicao;
+    int direcaoMovimento, sentidoMovimento;
 }Fantasma;
 
-
 typedef struct {
-    int posicaoX, posicaoY;
+    Posicao posicao;
 }Portal;
 
 typedef struct{
