@@ -23,6 +23,11 @@
 #define MOVIMENTO_PARA_CIMA 'w'
 #define MOVIMENTO_PARA_BAIXO 's'
 
+#define MOVIMENTO_HORIZONTAL 1
+#define MOVIMENTO_VERITICAL 2
+#define MOVIMENTO_SENTIDO_ESQUERDA 1
+#define MOVIMENTO_SENTIDO_DIREITA 2
+
 
 /**
  * @brief Definição de estruturas de dados dos componentes do código;
