@@ -70,6 +70,11 @@ typedef struct {
 
 typedef struct{
     Mapa mapa;
+    int indice;
+}Trilha;
+
+typedef struct{
+    Mapa mapa;
     Pacman pacman;
     Fantasma fantasma;
     Estatisticas estatisticas;
