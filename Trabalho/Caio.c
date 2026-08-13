@@ -33,7 +33,7 @@
  * @brief Definição de estruturas de dados dos componentes do código;
  */
 
- typedef struct {
+ typedef struct{
     int x, y;
  }Posicao;
 
@@ -46,7 +46,7 @@ typedef struct{
     int direcaoMovimento, sentidoMovimento;
 }Fantasma;
 
-typedef struct {
+typedef struct{
     Posicao posicao;
 }Portal;
 
@@ -55,6 +55,25 @@ typedef struct{
     Portal entrada, saida;
 }Mapa;
 
+typedef struct{
+    char tipo;
+    int numero;
+    // Variáveis lógicas que verificao se houve pontuação ou não e/ou colisão ou não;
+    int pontuado, colisao;
+}Movimento;
+
+typedef struct {
+    int movimentos, movimentosSemPontuar, colisoes,
+        movimentosParaBaixo, movimentosParaCima,
+        movimentosParaEsquerda, movimentosParaDireita;
+}Estatisticas;
+
+typedef struct{
+    Mapa mapa;
+    Pacman pacman;
+    Fantasma fantasma;
+    Estatisticas estatisticas;
+}Jogo;
 
 
 int main() {
