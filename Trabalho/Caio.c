@@ -76,6 +76,19 @@ typedef struct{
 }Jogo;
 
 
+/**
+ * @brief Funções principais que ditarão o andamento do jogo;
+ *  
+ * @OBS: A função de tratar o túnel será inserida junto a funções auxiliares;
+ */
+Jogo inicializarJogo();
+Jogo realizaJogo(Jogo jogo);
+void gerarResumo(Jogo jogo);
+void gerarRanking(Jogo jogo);
+void gerarEstatisticas(Jogo jogo);
+void gerarTrilha(Jogo jogo);
+
+
 int main() {
 
     return 0;
