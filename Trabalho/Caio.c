@@ -94,6 +94,14 @@ void gerarEstatisticas(Jogo jogo);
 void gerarTrilha(Jogo jogo);
 
 
+/**
+ * @author Caio Costa Lopes
+ * @date 13/08/2026
+ * 
+ * @brief Programa que roda uma simulação do jogo do Pacman no terminal;
+ * 
+ * @return int Programa principal
+ */
 int main() {
 
     return 0;
