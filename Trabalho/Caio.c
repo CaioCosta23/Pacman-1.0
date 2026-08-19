@@ -97,6 +97,20 @@ Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
 
+Estatisticas criarEstatisticas(){
+    Estatisticas estatisticas;
+
+    estatisticas.movimentos = 0;
+    estatisticas.movimentosSemPontuar = 0;
+    estatisticas.colisoes = 0;
+    estatisticas.movimentosParaBaixo = 0;
+    estatisticas.movimentosParaCima = 0;
+    estatisticas.movimentosParaEsquerda = 0;
+    estatisticas.movimentosParaDireita = 0;
+
+    return estatisticas;
+}
+
 /**
  * @author Caio Costa Lopes
  * @date 13/08/2026
