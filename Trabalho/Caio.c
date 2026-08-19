@@ -13,6 +13,9 @@
 #define TUNEL '@'
 
 #define PACMAN '>'
+
+#define MAXIMO_FANTASMAS 4
+
 #define FANTASMA_B 'B'
 #define FANTASMA_P 'P'
 #define FANTASMA_I 'I'
@@ -76,7 +79,7 @@ typedef struct{
 typedef struct{
     Mapa mapa;
     Pacman pacman;
-    Fantasma fantasma;
+    Fantasma fantasmas[MAXIMO_FANTASMAS];
     Estatisticas estatisticas;
 }Jogo;
 
