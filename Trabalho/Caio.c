@@ -87,11 +87,11 @@ typedef struct{
  * @OBS: A função de tratar o túnel será inserida junto a funções auxiliares;
  */
 Jogo inicializarJogo();
-Jogo realizaJogo(Jogo jogo);
-void gerarResumo(Jogo jogo);
-void gerarRanking(Jogo jogo);
-void gerarEstatisticas(Jogo jogo);
-void gerarTrilha(Jogo jogo);
+Jogo realizarJogo(Jogo jogo);
+Jogo gerarResumo(Jogo jogo);
+Jogo gerarRanking(Jogo jogo);
+Jogo gerarEstatisticas(Jogo jogo);
+Jogo gerarTrilha(Jogo jogo);
 
 
 /**
@@ -103,6 +103,24 @@ void gerarTrilha(Jogo jogo);
  * @return int Programa principal
  */
 int main() {
+    Jogo jogo;
+
+    jogo = inicializarJogo();
+    jogo = realizarJogo(jogo);
+    jogo = gerarResumo(jogo);
+    jogo = gerarRanking(jogo);
+    jogo = gerarEstatisticas(jogo);
 
     return 0;
+}
+
+Jogo inicializarJogo() {
+    Jogo jogo;
+
+    jogo.mapa = criarMapa();
+    jogo.pacman = criarPacman(jogo.mapa);
+    criarFantasmas(jogo.fantasmas, jogo.mapa);
+    jogo.estatisticas = criarEstatisticas();
+
+    return jogo;
 }
