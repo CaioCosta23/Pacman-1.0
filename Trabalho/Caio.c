@@ -36,29 +36,39 @@
  * @brief Definição de estruturas de dados dos componentes do código;
  */
 
+ // Estrutura de dados que representa uma posição no mapa;
  typedef struct{
     int x, y;
  }Posicao;
 
+// Estrutura de dados que representa o Pacman;
 typedef struct{
     Posicao posicao;
 }Pacman;
 
+
+// Estrutura de dados que representa um fantasma;
 typedef struct{
     Posicao posicao;
     int direcaoMovimento, sentidoMovimento;
 }Fantasma;
 
+
+// Estrutura de dados que representa um portal;
 typedef struct{
     Posicao posicao;
 }Portal;
 
+
+//Estrutura de dados que representa o mapa do jogo;
 typedef struct{
     int linhas, colunas;
     char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; // Posições controladas porrrr uma matriz comum, por ser mais "fácil" que a estrutura posição;
     Portal entrada, saida;
 }Mapa;
 
+
+// Estrutura de dados que representa o registro de um movimento;
 typedef struct{
     char tipo;
     int numero;
@@ -66,17 +76,23 @@ typedef struct{
     int pontuado, colisao;
 }Movimento;
 
+
+// Estrutura de dados que guarda as estatisticas do jogo;
 typedef struct {
     int movimentos, movimentosSemPontuar, colisoes,
         movimentosParaBaixo, movimentosParaCima,
         movimentosParaEsquerda, movimentosParaDireita;
 }Estatisticas;
 
+
+// Estrutura de dados que guarda a trilha (estados do mapa em cada jogada);
 typedef struct{
     Mapa mapa;
     int indice;
 }Trilha;
 
+
+// Estrutura de dados que guarda os dados/ entidades principais do jogo;
 typedef struct{
     Mapa mapa;
     Pacman pacman;
