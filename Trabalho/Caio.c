@@ -7,6 +7,8 @@
 #define MAXIMO_LINHAS 40
 #define MAXIMO_COLUNAS 100
 
+#define INICIALIZACAO_DADOS -1
+
 #define ESPACO ' '
 #define PAREDE '#'
 #define COMIDA '*'
@@ -36,7 +38,7 @@
  * @brief Definição de estruturas de dados dos componentes do código;
  */
 
- // Estrutura de dados que representa uma posição no mapa;
+ // Estrutura de dados que representa uma posição no mapa (Faz referência a uma localização exata no mapa);
  typedef struct{
     int x, y;
  }Posicao;
@@ -63,7 +65,13 @@ typedef struct{
 //Estrutura de dados que representa o mapa do jogo;
 typedef struct{
     int linhas, colunas;
-    char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; // Posições controladas porrrr uma matriz comum, por ser mais "fácil" que a estrutura posição;
+    /*
+     * Posições controladas por uma matriz comum (conjunto simples), por ser mais "fácil" que a
+     * estrutura "Posicao" (que é uma estrutura mais "complexa" e mais difícil de se controlar e referênciar quando necessário
+     * uma varredura no mapa por completo);
+    */
+    //char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
+    Posicao posicoes[MAXIMO_LINHAS * MAXIMO_COLUNAS]; // Possui todas as posiçoes possíveis de um mapa com dimensões máximas (determinadas nas regras do jogo);
     Portal entrada, saida;
 }Mapa;
 
@@ -113,21 +121,93 @@ Jogo gerarRanking(Jogo jogo);
 Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
+
+/**
+ * @brief Obtém o número da linha de uma posição;
+ * 
+ * @param posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição a ser verificada;
+ * @return int Numero da linha da posicao;
+ */
+int obtemLinhaPosicao(Posicao posicao) {
+    return posicao.x;
+}
+
+/**
+ * @brief Obtém o número da coluna de uma posição;
+ * 
+ * @param posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição a ser verificada;
+ * @return int Numero da coluna da posicao;
+ */
+int obtemColunaPosicao(Posicao posicao) {
+    return posicao.y;
+}
+
+/**
+ * @brief Atualiza os dados de uma posição;
+ * 
+ * @param x Linha da posição/coordenada a ser atualizada;
+ * @param y Coluna da posição/coordenada a ser atualizada;
+ * @return Posicao Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição atualizada;
+ */
+Posicao atualizaPosicao(int x, int y) {
+    Posicao posicao;
+
+    posicao.x = x;
+    posicao.y = y;
+
+    return posicao;
+}
+
+/**
+ * @brief Cria/Inicializa uma posição com dados padrões ('setados');
+ * 
+ * @return Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição inicializada com valores padrões;
+ */
+Posicao criaPosicao() {
+    return atualizaPosicao(INICIALIZACAO_DADOS, INICIALIZACAO_DADOS);
+}
+
+
+Mapa criarMapa() {
+    Mapa mapa;
+    // Em desenvolvimento;
+    return mapa;
+}
+
+
+int encontraPacman(char elemento) {
+    return (elemento == PACMAN);
+}
+
+
+/**
+ * @brief 
+ * 
+ * @param mapa 
+ * @return Pacman 
+ */
 Pacman criarPacman(Mapa mapa) {
     Pacman pacman;
-    unsigned short int l, c;
-
-    /*
-    // A implementar;
-    for (l = 0; l < mapa.linhas; l++) {
-        for(c = 0; mapa.colunas; c++) {
-            
-        }
-    }
-    */
+    
+    pacman.posicao = criaPosicao();
 
     return pacman;
 }
+
+/**
+ * @brief Atribui os dados (coordenadas de )
+ * 
+ * @param pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman que terá a posição atualizada;
+ * @param x Número que representa a linha da posição/coordenada que será utilizada para atualizar a posição do pacman;
+ * @param y Número que representa a coluna da posição/coordenada que será utilizada para atualizar a posição do pacman;
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Pacman com sua posição atualizada;
+ */
+Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
+    pacman.posicao = atualizaPosicao(posicao.x, posicao.y);
+
+    return pacman;
+}
+
 
 Estatisticas criarEstatisticas(){
     Estatisticas estatisticas;
@@ -142,6 +222,9 @@ Estatisticas criarEstatisticas(){
 
     return estatisticas;
 }
+
+
+
 
 /**
  * @author Caio Costa Lopes
