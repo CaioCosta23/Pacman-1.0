@@ -55,6 +55,7 @@ typedef struct{
 
 typedef struct{
     int linhas, colunas;
+    char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; // Posições controladas porrrr uma matriz comum, por ser mais "fácil" que a estrutura posição;
     Portal entrada, saida;
 }Mapa;
 
@@ -96,6 +97,21 @@ Jogo gerarRanking(Jogo jogo);
 Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
+Pacman criarPacman(Mapa mapa) {
+    Pacman pacman;
+    unsigned short int l, c;
+
+    /*
+    // A implementar;
+    for (l = 0; l < mapa.linhas; l++) {
+        for(c = 0; mapa.colunas; c++) {
+            
+        }
+    }
+    */
+
+    return pacman;
+}
 
 Estatisticas criarEstatisticas(){
     Estatisticas estatisticas;
