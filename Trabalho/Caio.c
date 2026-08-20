@@ -68,10 +68,9 @@ typedef struct{
     /*
      * Posições controladas por uma matriz comum (conjunto simples), por ser mais "fácil" que a
      * estrutura "Posicao" (que é uma estrutura mais "complexa" e mais difícil de se controlar e referênciar quando necessário
-     * uma varredura no mapa por completo);
+     * uma varredura no mapa por completo), além de impressão e obtenção de dados;
     */
-    //char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
-    Posicao posicoes[MAXIMO_LINHAS * MAXIMO_COLUNAS]; // Possui todas as posiçoes possíveis de um mapa com dimensões máximas (determinadas nas regras do jogo);
+    char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
     Portal entrada, saida;
 }Mapa;
 
@@ -122,6 +121,7 @@ Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
 
+
 /**
  * @brief Obtém o número da linha de uma posição;
  * 
@@ -168,9 +168,11 @@ Posicao criaPosicao() {
 }
 
 
+void imprimeMapa()
+
 Mapa criarMapa() {
     Mapa mapa;
-    // Em desenvolvimento;
+    
     return mapa;
 }
 
