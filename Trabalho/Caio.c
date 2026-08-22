@@ -12,7 +12,9 @@
 #define ESPACO ' '
 #define PAREDE '#'
 #define COMIDA '*'
-#define TUNEL '@'
+#define PORTAL '@'
+
+#define MAXIMO_PORTAIS 2
 
 #define PACMAN '>'
 
@@ -65,6 +67,7 @@ typedef struct{
 // Estrutura de dados que representa um portal;
 typedef struct{
     Posicao posicao;
+    unsigned short int ativo; 
 }Portal;
 
 
@@ -77,7 +80,7 @@ typedef struct{
      * uma varredura no mapa por completo), além de impressão e obtenção de dados;
     */
     char elemento[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
-    Portal entrada, saida;
+    Portal portais[MAXIMO_PORTAIS];
 }Mapa;
 
 
@@ -243,9 +246,10 @@ Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
 // -> Funções de Fantasmas
 
 /**
- * @brief 
+ * @brief Cria fantasmas com dados padrões iniciais;
  * 
- * @return Fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Fantasma;
+ * @param fantasmas Vetor/Lista de Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos fantasmas que seram inicializados
+ * com dados padrões;
  */
 void criarFantasmas(Fantasma fantasmas[]) {
     unsigned short int f;
@@ -256,18 +260,17 @@ void criarFantasmas(Fantasma fantasmas[]) {
         fantasmas[f].sentidoMovimento = 0;
         fantasmas[f].identificador = '\0';
     }
-
 }
 
 /**
- * @brief 
+ * @brief Função que inicializa/atribui dados dos fantasmas do jogo;
  * 
- * @param fantasma 
- * @param posicao 
- * @param identificador 
- * @return Fantasma 
+ * @param fantasmas Vetor/Lista de Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos fantasmas atualizados com as
+ * informações e características que os mesmos terão no jogo (caso exista(m));
+ * @param mapa Mapa do jogo (atualizado) que será utilizado para buscar os fantasmas dentro do jogo;
+ *
  */
-void inicializarFantasma(Fantasma fantasmas[], Mapa mapa) {
+void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[0].posicao = buscaPosicaoElemento(mapa, FANTASMA_B);
     fantasmas[0].direcaoMovimento = MOVIMENTO_HORIZONTAL;
     fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_ESQUERDA;
@@ -285,8 +288,40 @@ void inicializarFantasma(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
 }
 
+
+void criarPortais(Portal portais[]) {
+    unsigned short int p;
+
+    for(p = 0; p < MAXIMO_PORTAIS; p++) {
+        portais[p].posicao = criarPosicao();
+        portais[p].ativo = 0;
+    }
+}
+
+void inicializaPortais(Portal portais[], Mapa mapa) {
+    unsigned short int p;
+
+    for(p = 0; p < MAXIMO_PORTAIS; p++) {
+        if (portais[p].ativo == 0){
+            portais[p].posicao = buscaPosicaoElemento(mapa, PORTAL);
+            portais[p].ativo = 1;
+        }
+    }
+}
+
 Mapa criarMapa() {
     Mapa mapa;
+    unsigned short int l, c;
+
+    mapa.linhas = MAXIMO_LINHAS;
+    mapa.colunas = MAXIMO_COLUNAS;
+    criarPortais(mapa.portais);
+
+    for(l = 0; l < mapa.linhas; l++) {
+        for(c = 0; mapa.colunas; c++) {
+            mapa.elemento[l][c] = '\0';
+        }
+    }
     
     return mapa;
 }
@@ -335,7 +370,8 @@ Jogo inicializarJogo() {
     jogo.mapa = inicializarMapa();
     jogo.pacman = criarPacman();
     jogo.pacman = inicializarPacman(jogo.pacman, jogo.mapa);
-    criarFantasmas(jogo.fantasmas, jogo.mapa);
+    criarFantasmas(jogo.fantasmas);
+    inicializarFantasmas(jogo.fantasmas, jogo.mapa);
     jogo.estatisticas = criarEstatisticas();
 
     return jogo;
