@@ -34,6 +34,8 @@
 #define MOVIMENTO_SENTIDO_DIREITA 2
 
 
+
+//----------------------------------------------------------Tipos-Abstratos-de-Dados----------------------------------------------------------------------------------
 /**
  * @brief Definição de estruturas de dados dos componentes do código;
  */
@@ -42,6 +44,7 @@
  typedef struct{
     int x, y;
  }Posicao;
+
 
 // Estrutura de dados que representa o Pacman;
 typedef struct{
@@ -70,7 +73,7 @@ typedef struct{
      * estrutura "Posicao" (que é uma estrutura mais "complexa" e mais difícil de se controlar e referênciar quando necessário
      * uma varredura no mapa por completo), além de impressão e obtenção de dados;
     */
-    char posicoes[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
+    char elemento[MAXIMO_LINHAS][MAXIMO_COLUNAS]; 
     Portal entrada, saida;
 }Mapa;
 
@@ -108,6 +111,7 @@ typedef struct{
 }Jogo;
 
 
+//-----------------------------------------------------------Funções-Principais--------------------------------------------------------------------------------------
 /**
  * @brief Funções principais que ditarão o andamento do jogo;
  *  
@@ -121,6 +125,9 @@ Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
 
+//-----------------------------------------------------------FUNÇÕES AUXILIARES--------------------------------------------------------------------------------------
+
+// -> Funções de Posicão
 
 /**
  * @brief Obtém o número da linha de uma posição;
@@ -147,7 +154,7 @@ int obtemColunaPosicao(Posicao posicao) {
  * 
  * @param x Linha da posição/coordenada a ser atualizada;
  * @param y Coluna da posição/coordenada a ser atualizada;
- * @return Posicao Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição atualizada;
+ * @return Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição atualizada;
  */
 Posicao atualizaPosicao(int x, int y) {
     Posicao posicao;
@@ -159,6 +166,31 @@ Posicao atualizaPosicao(int x, int y) {
 }
 
 /**
+ * @brief Busca um por um elemento do jogo no mapa e retorna sua posição caso o mesmo seja achado;
+ * 
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa (atual) do jogo;
+ * @param elemento Elemento do jogo que será procurado dentro do mapa;
+ * @return Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição do elemento (cso o mesmo tenha sido achado,
+ * caso contrário, retorna uma posição inicializada com valores padrões, indicando que o elemento não está no mapa);
+ */
+Posicao buscaPosicaoElemento(Mapa mapa, char elemento) {
+    int l, c;
+    Posicao posicao;
+    
+    posicao = criaPosicao();
+
+    for(l = 0; l < mapa.linhas; l++) {
+        for(c = 0; c < mapa.colunas; c++) {
+            if (elemento == mapa.elemento[l][c]){
+                posicao = atualizaPosicao(l, c);
+                break;
+            }
+        }
+    }
+    return posicao;
+}
+
+/**
  * @brief Cria/Inicializa uma posição com dados padrões ('setados');
  * 
  * @return Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição inicializada com valores padrões;
@@ -166,9 +198,6 @@ Posicao atualizaPosicao(int x, int y) {
 Posicao criaPosicao() {
     return atualizaPosicao(INICIALIZACAO_DADOS, INICIALIZACAO_DADOS);
 }
-
-
-void imprimeMapa()
 
 Mapa criarMapa() {
     Mapa mapa;
