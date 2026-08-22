@@ -218,7 +218,7 @@ Pacman criarPacman() {
 }
 
 /**
- * @brief 
+ * @brief Inicializa os dados do pacman co as informações iniciais coletadas do mapa inicial do jogo (com seus dados já atribuidos);
  * 
  * @param pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com informações padrões iniciais;
  * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa atualizados;
