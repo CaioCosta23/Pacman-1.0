@@ -37,9 +37,7 @@
 #define MOVIMENTO_SENTIDO_CIMA 1
 #define MOVIMENTO_SENTIDO_BAIXO 2
 
-
-
-//----------------------------------------------------------Tipos-Abstratos-de-Dados----------------------------------------------------------------------------------
+//--------------------------------------------------------------------TIPOS-ABSTRATOS-DE-DADOS-----------------------------------------------------------------------------------------------
 /**
  * @brief Definição de estruturas de dados dos componentes do código;
  */
@@ -116,8 +114,7 @@ typedef struct{
     Estatisticas estatisticas;
 }Jogo;
 
-
-//-----------------------------------------------------------Funções-Principais--------------------------------------------------------------------------------------
+//------------------------------------------------------------------DECLARAÇÃO-DE-FUNÇÕES-PRINCIPAIS------------------------------------------------------------------------------------------
 /**
  * @brief Funções principais que ditarão o andamento do jogo;
  *  
@@ -130,8 +127,7 @@ Jogo gerarRanking(Jogo jogo);
 Jogo gerarEstatisticas(Jogo jogo);
 Jogo gerarTrilha(Jogo jogo);
 
-
-//-----------------------------------------------------------FUNÇÕES AUXILIARES--------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------FUNÇÕES AUXILIARES--------------------------------------------------------------------------------------------------
 
 // -> Funções de Posicão
 
@@ -205,7 +201,7 @@ Posicao criarPosicao() {
     return atualizaPosicao(INICIALIZACAO_DADOS, INICIALIZACAO_DADOS);
 }
 
-//.................................................................................................................................................................
+//..........................................................................................................................................................................................
 // -> Funções de Pacman
 
 /**
@@ -241,8 +237,7 @@ Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
     return pacman;
 }
 
-
-//.................................................................................................................................................................
+//..........................................................................................................................................................................................
 // -> Funções de Fantasmas
 
 /**
@@ -288,7 +283,15 @@ void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
 }
 
+//..........................................................................................................................................................................................
+// -> Funções de Portais
 
+/**
+ * @brief Cria os portais do jogo com dados inicializados com valores padrões;
+ * 
+ * @param portais Vetor/Lista de Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos portais do mapa,
+ * que seram inicializados com dados padrões;
+ */
 void criarPortais(Portal portais[]) {
     unsigned short int p;
 
@@ -298,6 +301,13 @@ void criarPortais(Portal portais[]) {
     }
 }
 
+/**
+ * @brief Atribui os dados necessários para o funcionamento dos portais;
+ * 
+ * @param portais Vetor/Lista de Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos portais do mapa atualizados,
+ * com as informações e características que os mesmos terão no jogo (caso exista(m));
+ * @param mapa Mapa do jogo (atualizado) que será utilizado para buscar os fantasmas dentro do jogo;
+ */
 void inicializaPortais(Portal portais[], Mapa mapa) {
     unsigned short int p;
 
@@ -309,6 +319,14 @@ void inicializaPortais(Portal portais[], Mapa mapa) {
     }
 }
 
+//..........................................................................................................................................................................................
+// -> Funções de Mapa
+
+/**
+ * @brief Cria um mapa com dados inicializados com valores padrões;
+ * 
+ * @return Mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos fantasmas que seram inicializados com dados padrões;
+ */
 Mapa criarMapa() {
     Mapa mapa;
     unsigned short int l, c;
@@ -322,10 +340,15 @@ Mapa criarMapa() {
             mapa.elemento[l][c] = '\0';
         }
     }
-    
     return mapa;
 }
 
+
+/**
+ * @brief Cria as estatísticas do jogo com dados inicializados com dados em valores padrões;
+ * 
+ * @return Estatisticas Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados das estatisticas que seram inicializados com dados padrões;
+ */
 Estatisticas criarEstatisticas(){
     Estatisticas estatisticas;
 
@@ -340,8 +363,7 @@ Estatisticas criarEstatisticas(){
     return estatisticas;
 }
 
-
-
+//-----------------------------------------------------------------------PROGRAMA PRINCIPAL--------------------------------------------------------------------------------------------------
 
 /**
  * @author Caio Costa Lopes
@@ -362,6 +384,8 @@ int main() {
 
     return 0;
 }
+
+//-----------------------------------------------------------------------FUNÇÕES-PRINCIPAIS--------------------------------------------------------------------------------------------------
 
 Jogo inicializarJogo() {
     Jogo jogo;
