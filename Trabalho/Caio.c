@@ -56,6 +56,7 @@ typedef struct{
 typedef struct{
     Posicao posicao;
     int direcaoMovimento, sentidoMovimento;
+    char identificador;
 }Fantasma;
 
 
@@ -177,7 +178,7 @@ Posicao buscaPosicaoElemento(Mapa mapa, char elemento) {
     int l, c;
     Posicao posicao;
     
-    posicao = criaPosicao();
+    posicao = criarPosicao();
 
     for(l = 0; l < mapa.linhas; l++) {
         for(c = 0; c < mapa.colunas; c++) {
@@ -195,32 +196,28 @@ Posicao buscaPosicaoElemento(Mapa mapa, char elemento) {
  * 
  * @return Posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da posição inicializada com valores padrões;
  */
-Posicao criaPosicao() {
+Posicao criarPosicao() {
     return atualizaPosicao(INICIALIZACAO_DADOS, INICIALIZACAO_DADOS);
 }
 
-Mapa criarMapa() {
-    Mapa mapa;
-    
-    return mapa;
-}
-
-
-int encontraPacman(char elemento) {
-    return (elemento == PACMAN);
-}
-
+//.................................................................................................................................................................
+// -> Funções de Pacman
 
 /**
- * @brief 
+ * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padróes iniciais;
  * 
- * @param mapa 
- * @return Pacman 
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padrões em seuus atributos;
  */
-Pacman criarPacman(Mapa mapa) {
+Pacman criarPacman() {
     Pacman pacman;
     
-    pacman.posicao = criaPosicao();
+    pacman.posicao = criarPosicao();
+
+    return pacman;
+}
+
+Pacman inicializaPacman(Pacman pacman, Mapa mapa) {
+    pacman.posicao = buscaPosicaoElemento(mapa, PACMAN);
 
     return pacman;
 }
@@ -239,6 +236,43 @@ Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
     return pacman;
 }
 
+
+//.................................................................................................................................................................
+// -> Funções de Fantasmas
+
+/**
+ * @brief 
+ * 
+ * @return Fantasma 
+ */
+Fantasma criarFantasma() {
+    Fantasma fantasma;
+
+    fantasma.posicao = criarPosicao();
+    fantasma.direcaoMovimento = 0;
+    fantasma.sentidoMovimento = 0;
+    fantasma.identificador = '\0';
+
+}
+
+/**
+ * @brief 
+ * 
+ * @param fantasma 
+ * @param mapa 
+ * @return Fantasma 
+ */
+Fantasma inicializarFantasma(Fantasma fantasma, Mapa mapa) {
+    //fantasma.posicao = buscaPosicaoElemento(mapa)
+
+    return fantasma;
+}
+
+Mapa criarMapa() {
+    Mapa mapa;
+    
+    return mapa;
+}
 
 Estatisticas criarEstatisticas(){
     Estatisticas estatisticas;
@@ -281,7 +315,9 @@ Jogo inicializarJogo() {
     Jogo jogo;
 
     jogo.mapa = criarMapa();
-    jogo.pacman = criarPacman(jogo.mapa);
+    jogo.mapa = inicializarMapa();
+    jogo.pacman = criarPacman();
+    jogo.pacman = inicializarPacman(jogo.pacman, jogo.mapa);
     criarFantasmas(jogo.fantasmas, jogo.mapa);
     jogo.estatisticas = criarEstatisticas();
 
