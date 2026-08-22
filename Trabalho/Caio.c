@@ -29,9 +29,11 @@
 #define MOVIMENTO_PARA_BAIXO 's'
 
 #define MOVIMENTO_HORIZONTAL 1
-#define MOVIMENTO_VERITICAL 2
+#define MOVIMENTO_VERTICAL 2
 #define MOVIMENTO_SENTIDO_ESQUERDA 1
 #define MOVIMENTO_SENTIDO_DIREITA 2
+#define MOVIMENTO_SENTIDO_CIMA 1
+#define MOVIMENTO_SENTIDO_BAIXO 2
 
 
 
@@ -216,7 +218,7 @@ Pacman criarPacman() {
     return pacman;
 }
 
-Pacman inicializaPacman(Pacman pacman, Mapa mapa) {
+Pacman inicializarPacman(Pacman pacman, Mapa mapa) {
     pacman.posicao = buscaPosicaoElemento(mapa, PACMAN);
 
     return pacman;
@@ -259,13 +261,26 @@ Fantasma criarFantasma() {
  * @brief 
  * 
  * @param fantasma 
- * @param mapa 
+ * @param posicao 
+ * @param identificador 
  * @return Fantasma 
  */
-Fantasma inicializarFantasma(Fantasma fantasma, Mapa mapa) {
-    //fantasma.posicao = buscaPosicaoElemento(mapa)
-
-    return fantasma;
+void inicializarFantasma(Fantasma fantasmas[], Mapa mapa) {
+    fantasmas[0].posicao = buscaPosicaoElemento(mapa, FANTASMA_B);
+    fantasmas[0].direcaoMovimento = MOVIMENTO_HORIZONTAL;
+    fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_ESQUERDA;
+   
+    fantasmas[1].posicao = buscaPosicaoElemento(mapa, FANTASMA_P);
+    fantasmas[1].direcaoMovimento = MOVIMENTO_VERTICAL;
+    fantasmas[1].sentidoMovimento = MOVIMENTO_SENTIDO_CIMA;
+    
+    fantasmas[2].posicao = buscaPosicaoElemento(mapa, FANTASMA_I);
+    fantasmas[2].direcaoMovimento = MOVIMENTO_VERTICAL;
+    fantasmas[2].sentidoMovimento = MOVIMENTO_SENTIDO_BAIXO;
+    
+    fantasmas[0].posicao = buscaPosicaoElemento(mapa, FANTASMA_C);
+    fantasmas[0].direcaoMovimento = MOVIMENTO_HORIZONTAL;
+    fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
 }
 
 Mapa criarMapa() {
