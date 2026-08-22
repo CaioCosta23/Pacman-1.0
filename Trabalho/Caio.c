@@ -205,7 +205,7 @@ Posicao criarPosicao() {
 // -> Funções de Pacman
 
 /**
- * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padróes iniciais;
+ * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados inicializados com valores padronizados;
  * 
  * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padrões em seuus atributos;
  */
@@ -217,22 +217,15 @@ Pacman criarPacman() {
     return pacman;
 }
 
+/**
+ * @brief 
+ * 
+ * @param pacman 
+ * @param mapa 
+ * @return Pacman 
+ */
 Pacman inicializarPacman(Pacman pacman, Mapa mapa) {
     pacman.posicao = buscaPosicaoElemento(mapa, PACMAN);
-
-    return pacman;
-}
-
-/**
- * @brief Atribui os dados (coordenadas de )
- * 
- * @param pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman que terá a posição atualizada;
- * @param x Número que representa a linha da posição/coordenada que será utilizada para atualizar a posição do pacman;
- * @param y Número que representa a coluna da posição/coordenada que será utilizada para atualizar a posição do pacman;
- * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Pacman com sua posição atualizada;
- */
-Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
-    pacman.posicao = atualizaPosicao(posicao.x, posicao.y);
 
     return pacman;
 }
@@ -241,7 +234,7 @@ Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
 // -> Funções de Fantasmas
 
 /**
- * @brief Cria fantasmas com dados padrões iniciais;
+ * @brief Cria fantasmas com dados iniciais com valores padrões;
  * 
  * @param fantasmas Vetor/Lista de Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos fantasmas que seram inicializados
  * com dados padrões;
@@ -391,7 +384,7 @@ Jogo inicializarJogo() {
     Jogo jogo;
 
     jogo.mapa = criarMapa();
-    jogo.mapa = inicializarMapa();
+    //jogo.mapa = inicializarMapa();
     jogo.pacman = criarPacman();
     jogo.pacman = inicializarPacman(jogo.pacman, jogo.mapa);
     criarFantasmas(jogo.fantasmas);
