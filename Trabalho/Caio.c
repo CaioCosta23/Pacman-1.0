@@ -207,7 +207,7 @@ Posicao criarPosicao() {
 /**
  * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados inicializados com valores padronizados;
  * 
- * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padrões em seuus atributos;
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padrões em seus atributos;
  */
 Pacman criarPacman() {
     Pacman pacman;
@@ -220,9 +220,9 @@ Pacman criarPacman() {
 /**
  * @brief 
  * 
- * @param pacman 
- * @param mapa 
- * @return Pacman 
+ * @param pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com informações padrões iniciais;
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa atualizados;
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados atualizados;
  */
 Pacman inicializarPacman(Pacman pacman, Mapa mapa) {
     pacman.posicao = buscaPosicaoElemento(mapa, PACMAN);
@@ -318,7 +318,7 @@ void inicializaPortais(Portal portais[], Mapa mapa) {
 /**
  * @brief Cria um mapa com dados inicializados com valores padrões;
  * 
- * @return Mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados dos fantasmas que seram inicializados com dados padrões;
+ * @return Mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa que seram inicializados com dados padrões;
  */
 Mapa criarMapa() {
     Mapa mapa;
@@ -336,6 +336,24 @@ Mapa criarMapa() {
     return mapa;
 }
 
+/**
+ * @brief Imprime o mapa do jogo na tela;
+ * 
+ * @param mapa 
+ */
+void imprimirMapa(Mapa mapa) {
+    unsigned short int l, c;
+
+    for(l = 0; l < mapa.linhas; l++) {
+        for(c = 0; c < mapa.colunas; c++) {
+            printf("%c", mapa.elemento[l][c]);
+        }
+        printf("\n");
+    }
+}
+
+//..........................................................................................................................................................................................
+// -> Funções de Estatisticas;
 
 /**
  * @brief Cria as estatísticas do jogo com dados inicializados com dados em valores padrões;
