@@ -245,15 +245,17 @@ Pacman atribuiPosicaoPacman(Pacman pacman, Posicao posicao) {
 /**
  * @brief 
  * 
- * @return Fantasma 
+ * @return Fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Fantasma;
  */
-Fantasma criarFantasma() {
-    Fantasma fantasma;
+void criarFantasmas(Fantasma fantasmas[]) {
+    unsigned short int f;
 
-    fantasma.posicao = criarPosicao();
-    fantasma.direcaoMovimento = 0;
-    fantasma.sentidoMovimento = 0;
-    fantasma.identificador = '\0';
+    for (f = 0; f < MAXIMO_FANTASMAS; f++) {
+        fantasmas[f].posicao = criarPosicao();
+        fantasmas[f].direcaoMovimento = 0;
+        fantasmas[f].sentidoMovimento = 0;
+        fantasmas[f].identificador = '\0';
+    }
 
 }
 
