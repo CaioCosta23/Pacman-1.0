@@ -25,17 +25,10 @@
 #define FANTASMA_I 'I'
 #define FANTASMA_C 'C'
 
-#define MOVIMENTO_PARA_ESQUERDO 'a'
+#define MOVIMENTO_PARA_ESQUERDA 'a'
 #define MOVIMENTO_PARA_DIREITA 'd'
 #define MOVIMENTO_PARA_CIMA 'w'
 #define MOVIMENTO_PARA_BAIXO 's'
-
-#define MOVIMENTO_HORIZONTAL 1
-#define MOVIMENTO_VERTICAL 2
-#define MOVIMENTO_SENTIDO_ESQUERDA 1
-#define MOVIMENTO_SENTIDO_DIREITA 2
-#define MOVIMENTO_SENTIDO_CIMA 1
-#define MOVIMENTO_SENTIDO_BAIXO 2
 
 //--------------------------------------------------------------------TIPOS-ABSTRATOS-DE-DADOS-----------------------------------------------------------------------------------------------
 /**
@@ -57,8 +50,7 @@ typedef struct{
 // Estrutura de dados que representa um fantasma;
 typedef struct{
     Posicao posicao;
-    int direcaoMovimento, sentidoMovimento;
-    char identificador;
+    char tipoMovimento, identificador;
 }Fantasma;
 
 
@@ -244,8 +236,7 @@ void criarFantasmas(Fantasma fantasmas[]) {
 
     for (f = 0; f < MAXIMO_FANTASMAS; f++) {
         fantasmas[f].posicao = criarPosicao();
-        fantasmas[f].direcaoMovimento = 0;
-        fantasmas[f].sentidoMovimento = 0;
+        fantasmas[f].tipoMovimento;
         fantasmas[f].identificador = '\0';
     }
 }
@@ -260,20 +251,16 @@ void criarFantasmas(Fantasma fantasmas[]) {
  */
 void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[0].posicao = buscaPosicaoElemento(mapa, FANTASMA_B);
-    fantasmas[0].direcaoMovimento = MOVIMENTO_HORIZONTAL;
-    fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_ESQUERDA;
+    fantasmas[0].tipoMovimento = MOVIMENTO_PARA_ESQUERDA;
    
     fantasmas[1].posicao = buscaPosicaoElemento(mapa, FANTASMA_P);
-    fantasmas[1].direcaoMovimento = MOVIMENTO_VERTICAL;
-    fantasmas[1].sentidoMovimento = MOVIMENTO_SENTIDO_CIMA;
+    fantasmas[1].tipoMovimento = MOVIMENTO_PARA_CIMA;
     
     fantasmas[2].posicao = buscaPosicaoElemento(mapa, FANTASMA_I);
-    fantasmas[2].direcaoMovimento = MOVIMENTO_VERTICAL;
-    fantasmas[2].sentidoMovimento = MOVIMENTO_SENTIDO_BAIXO;
+    fantasmas[2].tipoMovimento = MOVIMENTO_PARA_BAIXO;
     
     fantasmas[3].posicao = buscaPosicaoElemento(mapa, FANTASMA_C);
-    fantasmas[3].direcaoMovimento = MOVIMENTO_HORIZONTAL;
-    fantasmas[3].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
+    fantasmas[3].tipoMovimento = MOVIMENTO_PARA_DIREITA;
 }
 
 //..........................................................................................................................................................................................
