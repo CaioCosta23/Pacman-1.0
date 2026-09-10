@@ -385,13 +385,7 @@ Estatisticas criarEstatisticas(){
  * @return int Programa principal
  */
 int main() {
-    Jogo jogo;
-
-    jogo = inicializarJogo();
-    jogo = realizarJogo(jogo);
-    jogo = gerarResumo(jogo);
-    jogo = gerarRanking(jogo);
-    jogo = gerarEstatisticas(jogo);
+    // Manter esse trecho em vazio até a leitura de arquivos;
 
     return 0;
 }
