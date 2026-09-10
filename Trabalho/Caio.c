@@ -271,9 +271,9 @@ void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[2].direcaoMovimento = MOVIMENTO_VERTICAL;
     fantasmas[2].sentidoMovimento = MOVIMENTO_SENTIDO_BAIXO;
     
-    fantasmas[0].posicao = buscaPosicaoElemento(mapa, FANTASMA_C);
-    fantasmas[0].direcaoMovimento = MOVIMENTO_HORIZONTAL;
-    fantasmas[0].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
+    fantasmas[3].posicao = buscaPosicaoElemento(mapa, FANTASMA_C);
+    fantasmas[3].direcaoMovimento = MOVIMENTO_HORIZONTAL;
+    fantasmas[3].sentidoMovimento = MOVIMENTO_SENTIDO_DIREITA;
 }
 
 //..........................................................................................................................................................................................
@@ -339,7 +339,7 @@ Mapa criarMapa() {
 /**
  * @brief Imprime o mapa do jogo na tela;
  * 
- * @param mapa 
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa (atualizado);
  */
 void imprimirMapa(Mapa mapa) {
     unsigned short int l, c;
