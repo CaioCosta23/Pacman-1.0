@@ -337,6 +337,29 @@ Mapa criarMapa() {
 }
 
 /**
+ * @brief Verifica se a posição está no limite do mapa;
+ * 
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados (atualizados) do mapa;
+ * @param posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados de uma posição do mapa;
+ * @return int 1 (verdadeiro) se a posição estiver no limite do mapa ou 0 (falso), caso contrário;
+ */
+int verificaLimiteMapa(Mapa mapa, Posicao posicao) {
+    return ((obtemLinhaPosicao(posicao) == (mapa.linhas - 1)) || (obtemColunaPosicao(posicao) == (mapa.colunas - 1)));
+}
+
+Mapa movimentaFantasma(Mapa mapa, Fantasma fantasma) {
+    if (!(verificaLimiteMapa(mapa, fantasma.posicao))){
+        
+    }
+
+    return mapa;
+}
+
+Mapa movimentaPacman(Mapa mapa, Pacman pacman) {
+    return mapa;
+}
+
+/**
  * @brief Imprime o mapa do jogo na tela;
  * 
  * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa (atualizado);
