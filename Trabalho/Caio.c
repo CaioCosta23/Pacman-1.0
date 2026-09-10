@@ -263,6 +263,29 @@ void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[3].tipoMovimento = MOVIMENTO_PARA_DIREITA;
 }
 
+Fantasma alteraMovimentoFantasma(Fantasma fantasma) {
+
+    switch (fantasma.tipoMovimento) {
+        case MOVIMENTO_PARA_BAIXO:
+            fantasma.tipoMovimento = MOVIMENTO_PARA_CIMA;
+            break;
+        case MOVIMENTO_PARA_CIMA:
+            fantasma.tipoMovimento = MOVIMENTO_PARA_BAIXO;
+            break;
+        case MOVIMENTO_PARA_DIREITA:
+            fantasma.tipoMovimento = MOVIMENTO_PARA_ESQUERDA;
+            break;
+        case MOVIMENTO_PARA_ESQUERDA:
+            fantasma.tipoMovimento = MOVIMENTO_PARA_DIREITA;
+            break;
+        default:
+            printf("Movimento incorreto.");
+            break;
+    }
+
+    return fantasma;
+}
+
 //..........................................................................................................................................................................................
 // -> Funções de Portais
 
@@ -335,9 +358,8 @@ int verificaLimiteMapa(Mapa mapa, Posicao posicao) {
 }
 
 Mapa movimentaFantasma(Mapa mapa, Fantasma fantasma) {
-    if (!(verificaLimiteMapa(mapa, fantasma.posicao))){
-        
-    }
+    if (verificaLimiteMapa(mapa, fantasma.posicao))
+        fantasma = alteraMovimentoFantasma(fantasma);
 
     return mapa;
 }
