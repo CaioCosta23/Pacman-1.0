@@ -194,12 +194,64 @@ Posicao criarPosicao() {
 }
 
 //..........................................................................................................................................................................................
+// -> Funções de Mapa
+
+/**
+ * @brief Cria um mapa com dados inicializados com valores padrões;
+ * 
+ * @return Mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa que seram inicializados com dados padrões;
+ */
+Mapa criarMapa() {
+    Mapa mapa;
+    unsigned short int l, c;
+
+    mapa.linhas = MAXIMO_LINHAS;
+    mapa.colunas = MAXIMO_COLUNAS;
+    criarPortais(mapa.portais);
+
+    for(l = 0; l < mapa.linhas; l++) {
+        for(c = 0; mapa.colunas; c++) {
+            mapa.elemento[l][c] = '\0';
+        }
+    }
+    return mapa;
+}
+
+/**
+ * @brief Verifica se a posição está no limite do mapa;
+ * 
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados (atualizados) do mapa;
+ * @param posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados de uma posição do mapa;
+ * @return int 1 (verdadeiro) se a posição estiver no limite do mapa ou 0 (falso), caso contrário;
+ */
+int verificaLimiteMapa(Mapa mapa, Posicao posicao) {
+    return ((obtemLinhaPosicao(posicao) == (mapa.linhas - 1)) || (obtemColunaPosicao(posicao) == (mapa.colunas - 1)));
+}
+
+/**
+ * @brief Imprime o mapa do jogo na tela;
+ * 
+ * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa (atualizado);
+ */
+void imprimirMapa(Mapa mapa) {
+    unsigned short int l, c;
+
+    for(l = 0; l < mapa.linhas; l++) {
+        for(c = 0; c < mapa.colunas; c++) {
+            printf("%c", mapa.elemento[l][c]);
+        }
+        printf("\n");
+    }
+}
+
+
+//..........................................................................................................................................................................................
 // -> Funções de Pacman
 
 /**
- * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados inicializados com valores padronizados;
+ * @brief Cria um Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Pacman com dados inicializados com valores padronizados;
  * 
- * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados padrões em seus atributos;
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Pacman com dados padrões em seus atributos;
  */
 Pacman criarPacman() {
     Pacman pacman;
@@ -214,7 +266,7 @@ Pacman criarPacman() {
  * 
  * @param pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com informações padrões iniciais;
  * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa atualizados;
- * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados da do Pacman com dados atualizados;
+ * @return Pacman Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do Pacman com dados atualizados;
  */
 Pacman inicializarPacman(Pacman pacman, Mapa mapa) {
     pacman.posicao = buscaPosicaoElemento(mapa, PACMAN);
@@ -263,6 +315,12 @@ void inicializarFantasmas(Fantasma fantasmas[], Mapa mapa) {
     fantasmas[3].tipoMovimento = MOVIMENTO_PARA_DIREITA;
 }
 
+/**
+ * @brief Altera o sentido;direção de movimento de um fantasma;
+ * 
+ * @param fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do fantasma com dados atualizados;
+ * @return Fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do fantasma com dados atualizados;
+ */
 Fantasma alteraMovimentoFantasma(Fantasma fantasma) {
 
     switch (fantasma.tipoMovimento) {
@@ -282,6 +340,20 @@ Fantasma alteraMovimentoFantasma(Fantasma fantasma) {
             printf("Movimento incorreto.");
             break;
     }
+
+    return fantasma;
+}
+
+/**
+ * @brief Atualiza a posição de um fanatasma (na sua estrutura de dados);
+ * 
+ * @param fantasma Fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do fantasma com dados atualizados;
+ * @param x Coordenada X da nova posição;
+ * @param y Coordenada Y da nova posição;
+ * @return Fantasma Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do fantasma com dados atualizados com sua psoição atualizada;
+ */
+Fantasma atualizaPosicaoFantasma(Fantasma fantasma, int x, int y) {
+    fantasma.posicao = atualizaPosicao(x, y);
 
     return fantasma;
 }
@@ -319,68 +391,6 @@ void inicializaPortais(Portal portais[], Mapa mapa) {
             portais[p].posicao = buscaPosicaoElemento(mapa, PORTAL);
             portais[p].ativo = 1;
         }
-    }
-}
-
-//..........................................................................................................................................................................................
-// -> Funções de Mapa
-
-/**
- * @brief Cria um mapa com dados inicializados com valores padrões;
- * 
- * @return Mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa que seram inicializados com dados padrões;
- */
-Mapa criarMapa() {
-    Mapa mapa;
-    unsigned short int l, c;
-
-    mapa.linhas = MAXIMO_LINHAS;
-    mapa.colunas = MAXIMO_COLUNAS;
-    criarPortais(mapa.portais);
-
-    for(l = 0; l < mapa.linhas; l++) {
-        for(c = 0; mapa.colunas; c++) {
-            mapa.elemento[l][c] = '\0';
-        }
-    }
-    return mapa;
-}
-
-/**
- * @brief Verifica se a posição está no limite do mapa;
- * 
- * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados (atualizados) do mapa;
- * @param posicao Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados de uma posição do mapa;
- * @return int 1 (verdadeiro) se a posição estiver no limite do mapa ou 0 (falso), caso contrário;
- */
-int verificaLimiteMapa(Mapa mapa, Posicao posicao) {
-    return ((obtemLinhaPosicao(posicao) == (mapa.linhas - 1)) || (obtemColunaPosicao(posicao) == (mapa.colunas - 1)));
-}
-
-Mapa movimentaFantasma(Mapa mapa, Fantasma fantasma) {
-    if (verificaLimiteMapa(mapa, fantasma.posicao))
-        fantasma = alteraMovimentoFantasma(fantasma);
-
-    return mapa;
-}
-
-Mapa movimentaPacman(Mapa mapa, Pacman pacman) {
-    return mapa;
-}
-
-/**
- * @brief Imprime o mapa do jogo na tela;
- * 
- * @param mapa Tipo Abstrato de Dados (T.A.D.) que representa a estrutura que guarda os dados do mapa (atualizado);
- */
-void imprimirMapa(Mapa mapa) {
-    unsigned short int l, c;
-
-    for(l = 0; l < mapa.linhas; l++) {
-        for(c = 0; c < mapa.colunas; c++) {
-            printf("%c", mapa.elemento[l][c]);
-        }
-        printf("\n");
     }
 }
 
