@@ -274,6 +274,11 @@ Pacman inicializarPacman(Pacman pacman, Mapa mapa) {
     return pacman;
 }
 
+Pacman movimentaPacman(Mapa mapa, Pacman pacman) {
+    
+    return pacman;
+}
+
 //..........................................................................................................................................................................................
 // -> Funções de Fantasmas
 
